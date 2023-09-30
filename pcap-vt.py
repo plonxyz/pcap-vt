@@ -7,7 +7,25 @@ VIRUSTOTAL_URL = "https://www.virustotal.com/api/v3/ip_addresses/{}"
 API_KEY = "YOUR_VIRUSTOTAL_API_KEY"
 
 
+def display_banner():
+  banner=r"""
+                                                                                           
+ #####   ####    ##   #####       ##   #    #   ##   #      #   # ###### ###### #####  
+ #    # #    #  #  #  #    #     #  #  ##   #  #  #  #       # #      #  #      #    # 
+ #    # #      #    # #    #    #    # # #  # #    # #        #      #   #####  #    # 
+ #####  #      ###### #####     ###### #  # # ###### #        #     #    #      #####  
+ #      #    # #    # #         #    # #   ## #    # #        #    #     #      #   #  
+ #       ####  #    # #         #    # #    # #    # ######   #   ###### ###### #    # 
+                                                                                       
+  
+            """
+  print(banner)
+
+def sanitize_filepath(path):
+    return path.strip("'")
+
 def extract_destination_ips(pcap_file):
+    pcap_file = sanitize_filepath(pcap_file)
     cap = pyshark.FileCapture(pcap_file)
     dest_ips_set = set()
 
@@ -33,6 +51,7 @@ def check_ip_virustotal(ip):
         return [ip, "Error", "Error", "Error", "Error"]
 
 if __name__ == "__main__":
+    display_banner()
     pcap_path = input("Please enter the path to the pcap file: ")
     ips_list = extract_destination_ips(pcap_path)
     results = []
