@@ -7,4 +7,5 @@ This script parses a given pcap file to extract unique destination IPs and then 
 - Python 3.x
 - `pyshark` library
 - `requests` library
+- `tqdm`library
 - A VirusTotal API key
